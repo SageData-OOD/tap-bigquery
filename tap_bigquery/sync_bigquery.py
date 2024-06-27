@@ -47,7 +47,7 @@ def _build_query(keys, filters=[], inclusive_start=True, limit=None):
         columns = columns + "," + keys["datetime_key"]
     keys["columns"] = columns
 
-    query = "SELECT {columns} FROM {table} WHERE 1=1".format(**keys)
+    query = "SELECT * FROM (SELECT {columns} FROM {table}) subquery WHERE 1=1".format(**keys)
 
     if filters:
         for f in filters:
