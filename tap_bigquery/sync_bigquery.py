@@ -91,8 +91,8 @@ def do_discover(config, stream, output_schema_file=None,
     keys = {"table": stream["table"],
             "columns": stream["columns"],
             "datetime_key": stream["datetime_key"],
-            "start_datetime": start_datetime,
-            "end_datetime": end_datetime
+            # "start_datetime": start_datetime,
+            # "end_datetime": end_datetime
             }
     limit = config.get("limit", 100)
     query = _build_query(keys, stream.get("filters"), limit=limit)
