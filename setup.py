@@ -28,7 +28,7 @@ setup(
     ],
 
     install_requires=[
-        "numpy==1.17.3",
+        "numpy==1.26.4",
         "attrs==19.3.0",
         "backoff==1.8.0",
         "getschema>=0.1.2",
