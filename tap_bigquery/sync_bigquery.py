@@ -47,7 +47,7 @@ def _build_query(keys, filters=[], inclusive_start=True, limit=None):
         columns = columns + "," + keys["datetime_key"]
     keys["columns"] = columns
 
-    query = "SELECT * FROM (SELECT {columns} FROM {table}) subquery WHERE 1=1".format(**keys)
+    query = "WITH subquery AS(SELECT {columns} FROM {table}) SELECT * FROM subquery WHERE 1=1".format(**keys)
 
     if filters:
         for f in filters:
@@ -246,7 +246,7 @@ def do_sync(config, state, stream):
 
             singer.write_record(stream.stream, record)
 
-            last_update = record[keys["datetime_key"]]
+            last_update = record[keys["datetime_key"].replace("`", "")]
             counter.increment()
 
     state = singer.write_bookmark(state, tap_stream_id, BOOKMARK_KEY_NAME,
